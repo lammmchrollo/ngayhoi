@@ -57,3 +57,12 @@ def dang_ky(data: DangKy):
         if ket_qua.rowcount == 0:
             raise HTTPException(status_code=409, detail="HET_CHO")
     return {"ok": True}
+
+
+@app.get("/api/con-cho")
+def con_cho(ma_phien: str):
+    with db_lock:
+        da_dang_ky = db.execute(
+            "SELECT COUNT(*) FROM dang_ky WHERE ma_phien = ?", (ma_phien,)
+        ).fetchone()[0]
+    return {"con_cho": max(SUC_CHUA - da_dang_ky, 0)}
