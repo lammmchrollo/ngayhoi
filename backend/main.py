@@ -8,7 +8,7 @@ from pydantic import BaseModel
 
 
 DB_PATH = os.getenv("DB_PATH", "ngayhoi.db")
-SUC_CHUA = 31
+SUC_CHUA = 30
 db = sqlite3.connect(DB_PATH, check_same_thread=False)
 db.execute("""
     CREATE TABLE IF NOT EXISTS dang_ky (
